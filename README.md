@@ -17,12 +17,12 @@ The first thing you need to do is to download some software that we will be usin
 3. Git
 
    The next program we will download is Git. This is a version control software and is used to help keep track of changes that are made when you are writting a paper or writing code for a program or project. The idea behind version control is like a library where you can store the main information on the cloud and then update what is there when you have made changes that you want to keep. Another key feature is that it keeps a record of each time you submit changes so you can go back, or revert, to any previous version of a project.  
-   [Download Git](https://gitforwindows.org/](https://git-scm.com/downloads)https://git-scm.com/downloads)
+   [Download Git](https://gitforwindows.org/](https://git-scm.com/downloads)https://git-scm.com/downloads)  
 
 4. R Studio
 
    The last thing we will download is going to be R Studio and it is going to be our workhorse. In short, it is a graphical user interface (GUI) that allows us to access Core R, libraries we download, version control, and many other aspects of a project all in one place. It is even possible to write an entire paper within R Studio and, most importantly, it is free.  
-   [Download R Studio](https://posit.co/download/rstudio-desktop/) _Scroll down for various operating system downloads._
+   [Download R Studio](https://posit.co/download/rstudio-desktop/) *Scroll down for various operating system downloads.*
 
 
    
