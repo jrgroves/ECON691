@@ -4,3 +4,8 @@ plugins:
 
 title: Economics 691
 author: Jeremy R. Groves, Ph.D., ACUE
+
+include:
+  - _pages
+  - assets
+  - index.html
