@@ -20,3 +20,14 @@ Now we need to set up R-Studio to be able to utilize Git and access GitHub. We w
 [Insert graphic]
 Along the left side, click on the part that states `GIT/SVN` and then make sure the box at the top is checked and then in the area below "Git Executable" you need to navigate to the git.exe file. Typically, on a PC, it will be located at `C:/Program Files/Git/bin/git.exe`. Once this is done, click Apply and then Okay.
 
+Next, we need to allow GitHub and R-Studio to talk to each other securely and for that we need a personal passkey. Fortunately someone wrote a library and program in R for that purpose, but since we only need this once every so often, we are not going to actually download and install the library. To use a library without installing it, we use the command `usethis::` so type the following command in the console (the large window on the left side) of R-Studio.
+```R
+usethis::create_github_token()
+```
+This should open up GitHub on your browser and ask you to log in. Once you do that, name your passkey whatever you want and then click on the drop-down menu and choose at least 90 Days. Scroll to the bottom and click Generate Token and you will get a sting of letters and numbers. This is Hexidecimal text and make sure to copy this and then paste it either in a Word file or a text file because once you close this window, you will NEVER get this token back. If you lose it; however, you can just generate a new one and use it. 
+Once you have copied the code somewhere else, go back to R-Studio and then type the following in the console.
+```R
+gitcreds::gitcreds_set()
+```
+You should see a set of options and you should choose `2` and then when it asks for the token, paste the hexidecimal code you copied and press enter. This will save the passkey in the R system files and you will only need to do this again if your code expires or, sometimes, when you update R.
+
