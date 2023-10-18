@@ -29,5 +29,5 @@ The first thing you need to do is to download some software that we will be usin
    [Download R Studio](https://posit.co/download/rstudio-desktop/) *Scroll down for various operating system downloads.*
 
 
-[Link to Step Two](./Week_One/Step_two.md)
+[Link to Step Two](_pages/wk1_st2.md)
 
