@@ -1,5 +1,5 @@
 ---
-title: Economics 691 Week One
+title: Economics 691 Week One - Part One
 ---
 
 # Economics 691
