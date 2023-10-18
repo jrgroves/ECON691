@@ -29,5 +29,7 @@ Once you have copied the code somewhere else, go back to R-Studio and then type 
 ```R
 gitcreds::gitcreds_set()
 ```
-You should see a set of options and you should choose `2` and then when it asks for the token, paste the hexidecimal code you copied and press enter. This will save the passkey in the R system files and you will only need to do this again if your code expires or, sometimes, when you update R.
+You should see a set of options and you should choose `2` and then when it asks for the token, paste the hexidecimal code you copied and press enter. This will save the passkey in the R system files and you will only need to do this again if your code expires or, sometimes, when you update R.  
+
+[Go to Step Three](_pages/wk1_st3.md)
 
