@@ -24,5 +24,11 @@ Name <- c("Jon", "Jen", "Jeff", "Julian", "Jerry", "Jeremy")
 ```
 Looking at this code we first see the object name and then we are assigning to that object a set of character values denoted by the quotation marks. THe command ```c()``` is a way to combine several different items within a vector. When you hit enter you will see the object *Name* show up in your environment. You can double click this to see it open in the viewer or you can type Name into the console and it will list the objects. Typically we do not want to see the entire vectors, only the first few things to get a feel for what is in the vector. To see the first five lines of an object (vector or dataframe), we use the command ```head()```. Use this with the Name object and notice you do not see the name Jeremy because this is the sixth item. 
 
-Next, I want you to create a numberic vector object called "Age" with the following numberic values: 25, 34, 17, 48, 33, and 29. 
+Next, I want you to create a numberic vector object called "Age" with the following numberic values: 25, 34, 17, 48, 33, and 29. Because both Name and Age are vectors, we can refer to items within those vectors using their location. For example, if I want to see what the thrid name is in the Name vectors I would use the command `R Name[3]`. The syntax is that the brackets mean you are referring to an item inside another item such as an oject inside the vector. Because we are working with a vector, there is only a row dimenstion, however, when we work with dataframes, we need both a row and a column. To see this, let us first make our dataframe with our Name and Age and let us call our dataframe "Roll."  
+```R
+Roll <- data.frame(Name, Age)
+```
+You will now see that the vectors are in a seperate section in the Enviornment window while Roll, which is a dataframe is in another. The same area that the dataframe is in will be the same place you will see lists appear when you use them. Now, if we want to know what the name and age of the third person on the roll is, we need to type `Roll[3, ].' You see that the indexing rule is *df[row,column]* and leaving the row or column empty will instruct R to show the entire set of that dimension. Additionally, if we use the `head()` command, we will get the top rows and all columns of the Roll dataframe.  
+
+Now create a new vector called "Gender" with the following inputs: "Male", "Female", "Male", Male", and "Male" and then add this to the dataframe called Roll. It should not work. This because, again, all vectors must be the same size. 
 
