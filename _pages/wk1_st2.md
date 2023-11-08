@@ -23,6 +23,8 @@ This code is creating editing an object called "myPaths" and adding the user def
 ### R-Studio and Git/GitHub
 Now we need to set up R-Studio to be able to utilize Git and access GitHub. We will discuss R-Studio more later, but it is basically a Graphic User Interface (GUI) that combines several data tools and allows use to more easily interact with R which has no native GUI. After you open R-Studio, go to the menu across the top of the screen and locate `TOOLS --> GLOBAL OPTIONS` and a smaller screen will open. Along the left side, click on the part that states `GIT/SVN` and then make sure the box at the top is checked and then in the area below "Git Executable" you need to navigate to the git.exe file. Typically, on a PC, it will be located at `C:/Program Files/Git/bin/git.exe`. Once this is done, click Apply and then Okay.
 
+![image](https://github.com/jrgroves/ECON691/assets/52717006/668fbf18-bb98-414e-9b94-d79e1ea9aa00)
+
 Next, we need to allow GitHub and R-Studio to talk to each other securely and for that we need a personal passkey. Fortunately someone wrote a library and program in R for that purpose, but since we only need this once every so often, we are not going to actually download and install the library. To use a library without installing it, we use the command `usethis::` so type the following command in the console (the large window on the left side) of R-Studio.
 
 ```R
