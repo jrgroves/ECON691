@@ -56,4 +56,4 @@ Now save this using the save icon in the editor and notice over in your Git tab 
 
 A new window will open that will show us a comparison of what we have and what we are committing. The red shaded areas are things that are deleted and the green shaded areas are things that have been added. In the upper-left of this new window we will see all of our files in the repository with an indication of what is staged and what is not and in the upper-right we will have a dialog window were we can input something about this commit. These comments are ways to remember and track what we are doing so we will just enter something like "Initial Commit with new README" and then click on commit. Once that is finished, we need to "PUSH" this to the GitHub repository which we do by simply pushing the PUSH button at the top of the screen. You can verify this by returning to your GitHub page, looking at your repository, and you will see the updated README file there with your text.
 
-[Go to Step 4](w1.st4.md)
+[Go to Step 4](w1_st4.md)
