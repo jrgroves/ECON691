@@ -1,5 +1,5 @@
 ---
-title: Economics 691 Week One
+title: Economics 691 Week One - Part One
 ---
 
 # Economics 691
@@ -29,5 +29,5 @@ The first thing you need to do is to download some software that we will be usin
    [Download R Studio](https://posit.co/download/rstudio-desktop/) *Scroll down for various operating system downloads.*
 
 
-   
+<!---[Link to Step Two](_pages/wk1_st2.md)---!>
 
