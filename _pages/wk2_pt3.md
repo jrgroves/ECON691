@@ -44,9 +44,10 @@ Now that our data is cleaned up and organized, we want to create our varaibles o
 
 core <- core %>%
   mutate(m_monthly = Med_Inc/12,
-         Rent_Share = Med_Rent/m_monthly)
+         Rent_Share = Med_Rent/m_monthly,
+         Affordable = Rent_Share - .33)
 ```
 
-To make sure this worked correctly, use the `summary(core)` command to produce a list of the summary statistics for all numeric varaibles in the dataframe **core**. What we are looking for are things that may seem out of place (like percentages greater than 1 if we know none should exist), NA values which will be listed under the column of summary states for any variable where they might exist, or Inf which stands for Infinite and typically occurs whenever we divide by zero. We should not see any of these except that there is a maximium share over 1.0 indicating that in at least one county, the median rent is greater than the monthly median income. 
+To make sure this worked correctly, use the `summary(core)` command to produce a list of the summary statistics for all numeric varaibles in the dataframe **core**. What we are looking for are things that may seem out of place (like percentages greater than 1 if we know none should exist), NA values which will be listed under the column of summary states for any variable where they might exist, or Inf which stands for Infinite and typically occurs whenever we divide by zero. We should not see any of these except that there is a maximium share over 1.0 indicating that in at least one county, the median rent is greater than the monthly median income. Finally, we will create an "Affordable" variable where we subtract our benchmark of 33% from our rent shares resulting in negative values (or zero) showing housing that is classified as "affordable" and positive values indicating housing that is not affordable.
 
 Another advantage of using the `summary()` command is that we can see things that look odd or out of place or identify outliers. In this case we have a clear outlier and can likely guess where it happends. We see the maximum median income is over $5 Million making the maximium monthly income more than $400,000. We can guess that this happens in Cook County, which is where Chicago is listed, and it also demostrates the issue with using county level data. We can narrow this down by either user our data view and then sort by the median income or user a filter command to filter our dataframe observations to confirm our suspicions. 
