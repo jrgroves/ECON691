@@ -52,4 +52,4 @@ To make sure this worked correctly, use the `summary(core)` command to produce a
 
 Another advantage of using the `summary()` command is that we can see things that look odd or out of place or identify outliers. In this case we have a clear outlier and can likely guess where it happends. We see the maximum median income is over $5 Million making the maximium monthly income more than $400,000. We can guess that this happens in Cook County, which is where Chicago is listed, and it also demostrates the issue with using county level data. We can narrow this down by either user our data view and then sort by the median income or user a filter command to filter our dataframe observations to confirm our suspicions. 
 
-(Click for next step)[wk2_pt4.md]
+[Click for next step](wk2_pt4.md)
