@@ -55,4 +55,4 @@ Another thing you must be careful with when pull down data is to make sure you k
 
 With these defined our are variables, we can now run our code to access the Census API and pull down this data, at the county level, for the State of Illinois in 2021. We do this using our `get_acs()` code located further up this page. This this is complete, you can check your data using the `head(acs)` command and you should have a dataframe with 204 Observations and 6 variables. You should also see in your console information about the grography of the data because this called an "sf" object that can also be linked geogrphically to other datasets.
 
-
+(Click for next step)[wk2_pt3.md]
