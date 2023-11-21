@@ -13,7 +13,7 @@ Another advantage of using this datasource is that is already linked to geograph
 
 ### *Tidycensus* Package
 
-First we start by installing the *tidycensus* pacakge to our machine because we will need that. Secondly, we need to let the U.S> Census Beurua know who we are by registering and obtaining an API Key. This is free and is simply a means of keeping tabs on who is accessing the database for what use. To obtain a key, go to the [https://api.census.gov/data/key_signup.html](Census Key Website) and fill in your name, email address and agree to the terms of service. Your key will now be sent to you in your email account. While we wait for that email to arrive, we need to setup R Studio to install the key into our R base code so that we do not have to input it everytime we want to utilize the Census API. 
+First we start by installing the *tidycensus* pacakge to our machine because we will need that. Secondly, we need to let the U.S> Census Beurua know who we are by registering and obtaining an API Key. This is free and is simply a means of keeping tabs on who is accessing the database for what use. To obtain a key, go to the [Census Key Website](https://api.census.gov/data/key_signup.html) and fill in your name, email address and agree to the terms of service. Your key will now be sent to you in your email account. While we wait for that email to arrive, we need to setup R Studio to install the key into our R base code so that we do not have to input it everytime we want to utilize the Census API. 
 
 In the console, run the following two lines of code (they will run as soon as you hit enter):
 ```R
@@ -55,4 +55,4 @@ Another thing you must be careful with when pull down data is to make sure you k
 
 With these defined our are variables, we can now run our code to access the Census API and pull down this data, at the county level, for the State of Illinois in 2021. We do this using our `get_acs()` code located further up this page. This this is complete, you can check your data using the `head(acs)` command and you should have a dataframe with 204 Observations and 6 variables. You should also see in your console information about the grography of the data because this called an "sf" object that can also be linked geogrphically to other datasets.
 
-(Click for next step)[wk2_pt3.md]
+[Click for next step](wk2_pt3.md)
