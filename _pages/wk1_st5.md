@@ -118,5 +118,5 @@ We can then copy and paste our text from our console or we can use other element
 
 We are done. Save this script by clicking the disk button in the script editor and then click Source to run it. You should then by able to type `summary(bls)` in the console and see that the columns names have changes and the values of the Establishment and Employment variables have been divided by 1,000. This command also reports the summary statistics for any numeric variables. If we wish to save the _bls_ object, we use the command `save()` with the syntax `(object name, file="")`. For us we will put our bls object inside our **Build/Output** folder so we will use the command `save(bls, file="./Build/Output/bls.RData")`. Since we are done, let us go to the upper-left window, click on the Git tab, stage and commit both our data and our script file and then push this to our repository.
 
-[Click for Homework Assignment](wk1-hw1.md)
+[Click to Start Week Two](wk2_pt1.md)
 
