@@ -28,4 +28,6 @@ It is becoming more common for data provides to provide deciated servers that ca
 
 I talk about the JSON file type because if there is no specific package to access a given API, you can still get and translate the data using packages that can translate JSON type data and communicate with any API. For our purposes, however, we are going to learn how to use the U.S. Census Buearu's main API and we can interact with it using the package *tidycensus*.
 
+(Clicke for next step)[wk2_pt2.md]
+
 
