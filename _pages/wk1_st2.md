@@ -1,6 +1,4 @@
----
-title: Week One - Step Two
----
+
 
 # Week One - Step Two
 ## Setup and Configuration
