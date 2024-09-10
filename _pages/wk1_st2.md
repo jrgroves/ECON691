@@ -2,7 +2,10 @@
 
 # Week One - Step Two
 ## Setup and Configuration
-Now that we have the programs installed using the default options, we need to make some configuration changes and setup some options within the software. We will be mostly working inside of R Studio for this, but first we need to make a change in an R file controlling where the program installs the libraries we will be using.
+Now that we have the programs installed using the default options, we need to make some configuration changes and setup some options within the software. 
+
+### GIT Identification
+The first thing we need to do is to identify yourself to GIT show that when we commit changes, we can know *who* made those changes. We will do this using GIT BASH which is the command line or shell version of GIT (similar to what we did in an early Tech Taco Tuesday). If you look at the set of files installed when you installed GIT on your machine, one option will be GIT Bash. Once that window has popped up, you are given the command prompt.
 
 ### R Library Setup
 R uses the idea of libraries as a means to expand what the program can do. Libraries are created by users and approved by the R developers and then hosted on the CRAN site for individuals to download and plug into R. Another aspect of how R works is that when the base R is updated and you install the new version, it DOES NOT overwrite the previous version, rather it installs the new version along side the older version. The reason for this is that some of the libraries fall out of use and are not updated for new R versions. If that is the case, you will be unable to use them in the new version; however, you can use them in the older versions of R. This is typically not an issue we will encounter so we will just ignore this possibility. 
