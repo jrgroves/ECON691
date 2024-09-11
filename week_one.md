@@ -31,7 +31,9 @@ Another nice package we will use frequently is the *tidyverse* package which is 
 
 <details>
   <summary> Example </summary>
-```R install_packages("tidyverse")```
+```R 
+install_packages("tidyverse")
+```
 </details>
 
 ### R-Studio and Git/GitHub
