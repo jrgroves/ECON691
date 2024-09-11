@@ -31,13 +31,14 @@ Another nice package we will use frequently is the *tidyverse* package which is 
 
 <details>
   <summary> Example </summary>
+  
 ```R 
 install_packages("tidyverse")
 ```
 </details>
 
 ### R-Studio and Git/GitHub
-Now we need to set up R-Studio to be able to utilize Git and access GitHub. We will discuss R-Studio more later, but it is basically a Graphic User Interface (GUI) that combines several data tools and allows use to more easily interact with R which has no native GUI. After you open R-Studio, go to the menu across the top of the screen and locate `TOOLS --> GLOBAL OPTIONS` and a smaller screen will open. Along the left side, click on the part that states `GIT/SVN` and then make sure the box at the top is checked and then in the area below "Git Executable" you need to navigate to the git.exe file. Typically, on a PC, it will be located at `C:/Program Files/Git/bin/git.exe`. Once this is done, click Apply and then Okay.
+Next we want to link `R Studio` with `Git` and allow it to access GitHub. We will discuss `R Studio` more later, but it is basically a Graphic User Interface (GUI) that combines several data tools and allows use to more easily interact with `R` which is a command-line based program. We do not have to use `R Studio` to utilize the feature of Git or GitHub because we can use the command line prompts (Git Bash) for that as well. Since `R Studio` provides a standard means of interacting with `R`, especially for novice users, we will continue to use this. With `R Studio` still open, go to the menu across the top of the screen and locate `TOOLS --> GLOBAL OPTIONS` and a smaller screen will open. Along the left side, click on the part that states `GIT/SVN` and then make sure the box at the top is checked and then in the area below "Git Executable" you need to navigate to the `git.exe` file. On a PC, it will be located at `C:/Program Files/Git/bin/git.exe`. You can either type this address in or you can naviagate to it via the Browse button. Once this box is filled in, click Apply and then Okay.
 
 ![image](https://github.com/jrgroves/ECON691/assets/52717006/668fbf18-bb98-414e-9b94-d79e1ea9aa00)
 
