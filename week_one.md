@@ -76,6 +76,8 @@ Across the top of the screen we see the standard "windows" type file system with
 
 ## Project Management
 
+To run an effective project, be it research or homework, you need to be organized. Organization also helps you work with others and remember what you did and why when you revisit a project either an hour or a year after you started it. Organization also helps you should you need to prove or verify your work either to a professor or a journal when you submit for publication. This later issue, that of reproducability, is becoming even more important given the number of cases of academic misconduct being uncovered, even among Nobel Prize winners. We are going to organize our project in `R Studio` and then back it up in a GitHub Repository for both protection and for easier remote access by ourselves or co-workers. We start the process in reverse however.
+
 ### Create Repository on GitHub
 
 A Repository is a place on the GitHub cloud where you can keep relevant files for any given project. I advise that you create a Repository for any and every project you work on as it will allow you to both maintain version control and ensure everything is located in one place and has a backup. While there are several ways to start a repository, we will utilize the GitHub page to start. 
@@ -83,50 +85,65 @@ Go to [GitHub](www.github.com), log into your account, and click on the green NE
 
 ### Create Project in R-Studio
 
-`R Studio` has a system built into it that acts as a means for keeping information and data on a project together called *PROJECTS*. We can create a project on our computer only, or we can link it to a GitHub or similar type repository. One of the powerful features of `R Studio` is that it can also be used as a file manager. Notice in the lower-right windowTo start a project, go to `R Studio` and in the upper-right corner you will see a button that says **PROJECT(none)**. Click on this and choose "New Project". A small screen will open on your computer and you need to click the Version Control banner and then click on the Git banner.  
+`R Studio` has a system built into it that acts as a means for keeping information and data on a project together called *PROJECTS*. We can create a project on our computer only, or we can link it to a GitHub or similar type repository. Creating projects, however, is of little use if we do not know where we left them so we are going to use the File Explore feature in `R Studio` to create a **Projects** directory somewhere on our computer. To do this, navigate to the *Files* tab in the lower-right screen in `R Studio` and navigate to where you want your **Projects** directory to be located. Once there, click on the *New Folder* icon across the type of the *Files* tab and create a **Projects** directory.
+
+Next we will return to that drop-down arrow in the upper-right corner that says **PROJECT(none)**. Click on this and choose "New Project". A small screen will open on your computer and you need to click the Version Control banner and then click on the Git banner.  
 
 <p align="center">
   <img src="https://github.com/jrgroves/ECON691/assets/52717006/64332c4b-b877-40b7-bc5b-a5c91569ecc3"/>
 </p>
 
-In the next screen you will copy and paste the URL from the repository that you created on GitHub and that will typically auto populate the Project Name dialog box. The third box is were it will live on your computer. I keep mine in a directory in my Documents folder called "Projects" and that is where each of my research projects live. If you want to change the default, do so, but it makes little difference.  
+The window that is now open is asking for the URL from the repository that you created on GitHub which you can get by simply navigating to the repository in your web browser and copy the URL from the location bar at the top of the browser. Once copied, you can paste in the URL space and that will typically auto populate the Project Name dialog box below it. The third box is were it will live on your computer and if not already dhowing your **Projects** directory, click the browse button and navigate to that directory. Once you are there and click open, click the "Create Project" button on the screen.  
 
-![image](https://github.com/jrgroves/ECON691/assets/52717006/6a2e5628-6035-4016-9ab1-997a0459726a)  
+<p align="center">
+  <img src="https://github.com/jrgroves/ECON691/assets/52717006/6a2e5628-6035-4016-9ab1-997a0459726a"/>
+</p>
 
-Once you hit "Create Project" it will appear that R-Studio reloads and we will be ready to start working with R-Studio.  
+Once you hit "Create Project" it will appear that `R Studio` reloads and we will be ready to start working. The other thing this action does is "clones" the repository at that URL you listed and populates your computer with anything located in that reponsitory. YOu can verify this because a thrid thing that happens is that the *Files* tab switches to a newly created directory within your **Projects** directory with the same name as your repo on GitHub and sets the working directory in `R` to that location. To verify this, type the `getwd()` in the console and see what is reported.  The last thing you should notice that is different is that there is now a new tab in the upper-right window of `R Studio` called *Git*. Under this tab is one way we can interact with both `Git` and GitHub.
 
-### A Quick Additional Git Setup
+### Your First Push
+Version control allows us to keep track of changes both by us and anyone else that has permission to access our repository. It does not, however, keep track of all of our key strokes and it can only track what we tell it to track and it takes a "snapshot" only when we tell it to. Whenever we create or modify a file, version control, or in this `Git` will recongize that it is different than what is currently in the repository, but that is the extent of what it will do on its own. We we complete our modifictaions and want to update what we have on our main or branch, we must first "stage" the files. 
 
-One thing you will notice different is in the upper-right window in R-Studio you have a new tab. Specifically the tabs are "Environment", "History", "Connections", and "Tutorial". Now there is a new tab called "Git". Click on that tab.  
+We can stage as many files as we want and we can think of "staging" as placing our newly changed files in an envelop that we are going to "mail" to our repo. To actually submit the changes so that version control will commit them to "memory", we have to commit them. When we commit a set of changes, we have the option to add a comment to our commit to tell ourselves or others what we changed in this part that is being committed. Once we commit, version control creates a new "version" of the project using those files and creates a history which contains the older versions of our project prior to those changes that were committed. To summarize the process using an example, lets say we have a some sort of project that is out in the world, such as a software program. Overtime we decide we need to add features, remove obsolute features, or fix errors, but we do not want to mess up what we have that works. This is where creating a "branch" comes into play. A branch starts with a copy of what we currently have "out in the world" and we can "check out" the program, make changes, and then commit those changes to the branch. Let's say our changes are going to take a month to finish; we would want to commit our work each day or couple of hours so we do not loose anything, but by committing it via version control, if we every realize we were going in the wrong direction, we can always recover some previous version. Only after we have made all of our changes and run the branch program to test it, will we merge our branch back to our main which then replaces the original program with the new version while still keeping a historical version of the original. 
 
-![image](https://github.com/jrgroves/ECON691/assets/52717006/b5a48908-8a66-4075-b261-cae64add552d)  
+To pratice this in our example, we are going to start a script file so go to the File --> New File --> R Script and start a fresh script in our editor window. When writing a script, everything we type is going to be "read" by `R` as a command unless we tell it otherwise. This is where commenting comes in. Commenting allows us to leave notes for ourselves or others about what is going one in the program to help both ourselves and others remember or understand what is going on. In an `R` script we can "comment" out a line by starting it with **#** (hash mark) and then everything after that mark will be ignored by `R`. note that we can put this at the start of the line to have `R` ignore everything or we can place it anywhere else on the line to have `R` ignore everything to the right of the mark. In the spirit of readability and reproducability, we should always start a new script with some basic information telling a reader what this script is supposed to do, note anything that should be done prior to running this script, who wrote the script and when, and any updates or major changes. So in your editor, input the following lines with the relevant information.
 
-The button we want to use first is the "MORE" button which will drop a menu down. Select "New Terminal" on that drop down menu.  
-
-![image](https://github.com/jrgroves/ECON691/assets/52717006/57778b3e-eae4-412a-86a9-840459593640)  
-
-You will see a new tab open in the right-side of R-Studio that you will use to type in commands to the main Git interface.  
-
-![image](https://github.com/jrgroves/ECON691/assets/52717006/77557241-2543-43cf-93cd-89083ace16f7)  
-
-What we want to do is to tell Git who we are on our computer via the two command lines below. Git will recognize names, but the more important aspect is the use of the email address.  
-
-```Git
-git config --global user.name "Jeremy R. Groves"
-git config --global user.email "jgroves@niu.edu"
+```R
+#This is my first script file for Economics 691
+#Your Name
+#Today's Date
 ```
 
-You can close out this terminal by clicking the small 'X' next to the name in the tab.
+Before we save this file, we want to put it in the "right" spot so that we keep our space organized. Look down into the *Files* tab in the auxilery window and click the **New Folder** icon and create a folder called **Build**. Next create three more folders called **Analysis**, **Data**, and **Paper**. What is going to go in each of these folders should be obvious. Once done creating the folders, double-click on the **Build** folder and then create another set of folders named **Code** and **Output**. The former is where we will store all of the code we use to "build" and clean our raw data and the latter will hold any data files created in this process that we will eventually use for our analysis. Once these folders are created, return to our script window and either click on the disk icon or click File --> Save As... on the menu. The file window should open in the working directory and you should see your four folders you first created. Navigate to **Build** and then **Code** and save your file as "First". `R Studio` will automatically affix the extension ".R" on your file to indicate it is an `R` script file. You can verify it saved if you double-click the **Code** directory in the *Files* tab in your auxilary window.
 
-### Your First Pull - Push
-Return to the upper-right window with the Git tab and notice there is a button called `Pull`. This does exactly what it would imply, it "pulls" from the repository what is new and different which, in this case is going to be the README.txt file that is in our repository. To see what I mean, go to the lower-right window and click on the FILE tab. Here we are using R-Studio's version of File Manager to see on our own computer the folder where we put our project. It should be empty at this point with the exception of a file called `.Rhisotry` and `.gitignore`. Return to the upper-right Git tab and click on the Pull button and then, when the work in the new window is done, click on DONE. now, if you look in the FILES tab, you should see the addition of a `README.txt` file. What you have done is ensured that what is on your computer includes everything that is in the repository on GitHub.  
+Another place you can see some activity is in the *Git* tab in the upper-right "enviornment" window. You should now see the "Build/Code" with an empty check box and two yellow boxes with question marks in them. You may also see a file ".gitignore" and maybe a couple of others. If you click on the empty box in front of the "Build/Code" you will see it change to a checkmark and the two yellow boxes will change to a green box with an 'A' in it. You will also see the text change to "Build/Code/First.R". What you have done is completed an initial "staging" of this script file. We now must "commit" this file to `Git`'s memory and we can do that by clicking on the *Commit* icon which will then open a new window. In this new window, we will see three smaller panels. The upper-left shows us all the files that are staged, the upper-right is going to be where we can add our comment, and the lower panel is a "comparison" that shows us additions, deletions, and what remains unchanged bewteen the stagged file and the one in the previous commit. 
 
-One of the great feature of R-Studio is that it will work as a combination of tools. If we double click the README.md file in the FILES tab, we will see a new window in the upper-left which is a text editor. The file extension `.md` stands for "markdown" and is a way to format text, similar to LaTeX or HTML, but much more scaled down. This is another great thing to learn, but beyond what we are doing now. The key thing is that we can type anything we want here. The `README.md` file is a great place to keep notes about your project or to provide other users with instructions for what to do. Right now, we want to just put a simple message here so type in the following the editor.
+Because this is a new file, everything is shaded in green. We will add the comment "Initial Commit" to the comment box and then click on the Commit button. What this has done is taken a snapshot of everything we had stagged and "committed" it to `Git's` memory. Now switch over to your web browser and refresh your GitHub reponsitory for our project and notice that nothing changed! This is because our commit ONLY added our changes to the version control tracking files on our local computer. If we want to send these changes, along with updating the files in our repository, we have to "Push" them up to the cloud. If you return to `R Studio` you will notice in the *Git* tab an icon that says "Push" and by licking this, it will send our version control file and copies of the updated files in our project that we had committed, to the cloud. Now return to the web browser, refresh, and notice the new directory **Build** which if you double-click, contains a directory **Code** which contains a file "First.R".
 
+But we made four directories on our compuater, why are they not here? Simple, we did not "stage" them and thus we did not tell `Git` to track them. This is actually helpful because we may not want to "track" via `Git` any raw data files because there are more complex ways you need to deal with very large datafiles and because the raw datafiles should never change anyway so tracking them with `Git` just makes `Git`'s job harder for no reason. What you can do is upload a copy of the files to your GitHub repo directly through the browser so that you have a backup, but then to also have a copy on your local computer with which you will work. 
+
+### Your First Pull
+
+Since you do not have a co-author on this project, we need to simulate someone making a change to the files on the repo. To simulate this, double-click on the "First.R" file and then click on the pen in the upper-right cornoer of the GitHub page. This will enter you into the editor in GitHub. Once here, enter the following commands in the script.
+
+```R
+rm(list=ls())
+A <- "Hello world!"
+A
 ```
-This is the repository for Economics 691 taught in the Fall 2023 semester. My name is Jeremy Groves and will eventually graduate with a Ph.D. or M.A. in Economics.
+
+Now click on the "Commit Changes" button and in the pop-up leave the comment "Co-author's change" and then click Okay. You have changed changed and committ that change of the "First.R" file to your GitHub repo. Switch over to `R Studio` and click on the small 'x' next to the "First.R" and then, in the *Files* tab in the auxilary window, navigate to **Build --> Code** and double-click "First.R". Do you see your new code?
+
+No, you should not because those changes are not local, they are still up in the cloud and you need to "Pull" them down. To accomplish this, close the "First.R" file again in the editor and then go to the *Git* tab in the environment window and click on "Pull". A window should pop up to show you that updates are being downloaded. Once this is finished and you close the window, reopen your "First.R" file and you should see the new code. If you then click on the "Source" icon in the editor window, you should see in your console the following output:
+
+```R
+> rm(list=ls())
+
+> A <- "Hello world!"
+
+> A
+[1] "Hello world!"
 ```
 
-Now save this using the save icon in the editor and notice over in your Git tab the `README.md` file has appeared with a blue M next to it. This indicates that this file is now different from what is in the repository or at least according to the latest version you pulled. What we want to do now is "stage" this file by clicking on the white box next to the file. When you do, the blue box shifts to the left side. When working with version control, it only keeps tract of changes that have been "committed" to the record. If we were to close this right now, delete the README.md file from our computer and pull down the repository again, our text would not be there. In order for the version control to remember our text, we have to commit it. We do this by staging the file first (we just did that) and then click the Commit button in our Git tab.  
+Congratulations, you have completed the use of version control, created and updated a repository and `R Studio` project, and run your first `R` script! I expect to see your completed dissertations next week!
 
-A new window will open that will show us a comparison of what we have and what we are committing. The red shaded areas are things that are deleted and the green shaded areas are things that have been added. In the upper-left of this new window we will see all of our files in the repository with an indication of what is staged and what is not and in the upper-right we will have a dialog window were we can input something about this commit. These comments are ways to remember and track what we are doing so we will just enter something like "Initial Commit with new README" and then click on commit. Once that is finished, we need to "PUSH" this to the GitHub repository which we do by simply pushing the PUSH button at the top of the screen. You can verify this by returning to your GitHub page, looking at your repository, and you will see the updated README file there with your text.
