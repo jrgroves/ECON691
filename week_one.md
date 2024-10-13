@@ -1,9 +1,7 @@
-# Week One
-
-## Setup and Configuration
+# Setup and Configuration
 Now that we have the programs installed using the default options, we need to make some configuration changes and setup some options within the software. 
 
-### GIT Identification
+## GIT Identification
 The first thing we need to do is to identify yourself to `GIT` show that when we commit changes, we can know *who* made those changes. We will do this using `GIT Bash` which is the command line or shell version of `GIT` (similar to what we did in an early Tech Taco Tuesday). If you look at the set of files installed when you installed GIT on your machine, one option will be `GIT Bash`. Once that window has popped up, you are given the command prompt where you need to input the two lines of command. Use your own name and email address that corresponds to your GitHub account.
 
 ```bash
@@ -12,7 +10,7 @@ git config --global user.email "jgroves@niu.edu"
 ```
 This will now tag all of your `GIT` work with your name and email so that we can make sure we know who has submitted what changes.
 
-### R Library Setup
+## R Library Setup
 `R` is a solid program for data analysis; however, most of its power comes in its ability to use libraries. These are add-ons created by other users that expand what the program can do or simplify the way a script is written. Most of these packages are located at the CRAN website; however, others can be found on GitHub. To use them, they must first be downlaoded and then installed into `R`. Another aspect of how `R` works is that when the base `R` is updated and you install the new version, it DOES NOT overwrite the previous version, rather it installs the new version along side the older version. The reason for this is that some of the libraries fall out of use and are not updated for new `R` versions and so having an older version allows users to access those tools. The tradeoff to this system is that the libraries are installed in the version specific folder so when you update `R`, you must also reinstall all libraries. Since we do not typically run into the version problem, it becomes helpful to place all of your libraries into one common directory and then just update where `R` looks for the library files.  
 
 To make this change, we first need to find the `Rprofile.R` file on your computers. For PC users you can find this file at `C:/Program Files/R/*current install*/library/base/R`. Navigate here using your file explorer program and then find the file Rprofile.R and right-click and choose to edit with Notepad++ or other text editor. When it opens, scroll all the way down to the bottom and then add the following text.  
@@ -37,7 +35,7 @@ install_packages("tidyverse")
 ```
 </details>
 
-### R-Studio and Git/GitHub
+## R-Studio and Git/GitHub
 Next we want to link `R Studio` with `Git` and allow it to access GitHub. We will discuss `R Studio` more later, but it is basically a Graphic User Interface (GUI) that combines several data tools and allows use to more easily interact with `R` which is a command-line based program. We do not have to use `R Studio` to utilize the feature of Git or GitHub because we can use the command line prompts (Git Bash) for that as well. Since `R Studio` provides a standard means of interacting with `R`, especially for novice users, we will continue to use this. With `R Studio` still open, go to the menu across the top of the screen and locate `TOOLS --> GLOBAL OPTIONS` and a smaller screen will open. Along the left side, click on the part that states `GIT/SVN` and then make sure the box at the top is checked and then in the area below "Git Executable" you need to navigate to the `git.exe` file. On a PC, it will be located at `C:/Program Files/Git/bin/git.exe`. You can either type this address in or you can naviagate to it via the Browse button. Once this box is filled in, click Apply and then Okay.
 
 <p align="center">
@@ -58,7 +56,7 @@ gitcreds::gitcreds_set()
 
 You should see a set of options and you should choose `2` and then when it asks for the token, paste the hexadecimal code you copied and press enter. This will save the passkey in the R system files and you will only need to do this again if your code expires or, sometimes, when you update R.  
 
-## Navigating R Studio
+# Navigating R Studio
 
 `R Studio` is a GUI, or Graphic User Interface, and allows us to access a command-line type program such as `R` in a more familure windows-esk environment. When you first open `R Studio` you will typically see the screen split into two panels with a long window on the left and another split-panel on the right.
 
@@ -74,16 +72,16 @@ If you click on the *Plots* tab, you will see a blank screen. This tabs shows us
 
 Across the top of the screen we see the standard "windows" type file system with our usual suspects: *File* and *Edit* all the way to *Help*. For our purposes we will mostly use the *Files* and the *Tools* command blocks. If you look to the far right along the top, you will see a drop-down arrow with the phrase **Project: (None)**. We will revisit that in a bit. Instead, click on the *Files* with your mouse and move down to the *New Files* item. This opens us a list of all the different types of files we can create within `R Studio` and you can see there is quite a bit which is why `R Studio` is so versitile. We will just lick the top choice of an *R Script*. When you click this the console window will shrink and slide down with a new window opening on the top-left side. This is, for all intense and purposes, a text editor and is where we will type our "script" that we want to run in the `R` environment. In this window, you will notice some icons across the top of the tab. The disk is to save the file and the *Run* icon will run the line the curser is located on whereas the *Source* icon will run the entire script. If we open additional scripts, they will show up in this window under different tabs along with any data views we use. 
 
-## Project Management
+# Project Management
 
 To run an effective project, be it research or homework, you need to be organized. Organization also helps you work with others and remember what you did and why when you revisit a project either an hour or a year after you started it. Organization also helps you should you need to prove or verify your work either to a professor or a journal when you submit for publication. This later issue, that of reproducability, is becoming even more important given the number of cases of academic misconduct being uncovered, even among Nobel Prize winners. We are going to organize our project in `R Studio` and then back it up in a GitHub Repository for both protection and for easier remote access by ourselves or co-workers. We start the process in reverse however.
 
-### Create Repository on GitHub
+## Create Repository on GitHub
 
 A Repository is a place on the GitHub cloud where you can keep relevant files for any given project. I advise that you create a Repository for any and every project you work on as it will allow you to both maintain version control and ensure everything is located in one place and has a backup. While there are several ways to start a repository, we will utilize the GitHub page to start. 
 Go to [GitHub](www.github.com), log into your account, and click on the green NEW button. In the top dialog box, input the name of your responsitory (ECON691_ABC - with ABC being your initials) and then, further down the page, click on the radio button for **README** file. Finally, ensure this is a public repository and then scroll to the bottom and click on create. This will take you to your repository page. This should look very close to the screen we used when learning markdown in GitHub and you can modify files here just as you did in that exercise. We, however, are going to use `R Studio` to do our editing. 
 
-### Create Project in R-Studio
+## Create Project in R-Studio
 
 `R Studio` has a system built into it that acts as a means for keeping information and data on a project together called *PROJECTS*. We can create a project on our computer only, or we can link it to a GitHub or similar type repository. Creating projects, however, is of little use if we do not know where we left them so we are going to use the File Explore feature in `R Studio` to create a **Projects** directory somewhere on our computer. To do this, navigate to the *Files* tab in the lower-right screen in `R Studio` and navigate to where you want your **Projects** directory to be located. Once there, click on the *New Folder* icon across the type of the *Files* tab and create a **Projects** directory.
 
@@ -101,7 +99,7 @@ The window that is now open is asking for the URL from the repository that you c
 
 Once you hit "Create Project" it will appear that `R Studio` reloads and we will be ready to start working. The other thing this action does is "clones" the repository at that URL you listed and populates your computer with anything located in that reponsitory. YOu can verify this because a thrid thing that happens is that the *Files* tab switches to a newly created directory within your **Projects** directory with the same name as your repo on GitHub and sets the working directory in `R` to that location. To verify this, type the `getwd()` in the console and see what is reported.  The last thing you should notice that is different is that there is now a new tab in the upper-right window of `R Studio` called *Git*. Under this tab is one way we can interact with both `Git` and GitHub.
 
-### Your First Push
+## Your First Push
 Version control allows us to keep track of changes both by us and anyone else that has permission to access our repository. It does not, however, keep track of all of our key strokes and it can only track what we tell it to track and it takes a "snapshot" only when we tell it to. Whenever we create or modify a file, version control, or in this `Git` will recongize that it is different than what is currently in the repository, but that is the extent of what it will do on its own. We we complete our modifictaions and want to update what we have on our main or branch, we must first "stage" the files. 
 
 We can stage as many files as we want and we can think of "staging" as placing our newly changed files in an envelop that we are going to "mail" to our repo. To actually submit the changes so that version control will commit them to "memory", we have to commit them. When we commit a set of changes, we have the option to add a comment to our commit to tell ourselves or others what we changed in this part that is being committed. Once we commit, version control creates a new "version" of the project using those files and creates a history which contains the older versions of our project prior to those changes that were committed. To summarize the process using an example, lets say we have a some sort of project that is out in the world, such as a software program. Overtime we decide we need to add features, remove obsolute features, or fix errors, but we do not want to mess up what we have that works. This is where creating a "branch" comes into play. A branch starts with a copy of what we currently have "out in the world" and we can "check out" the program, make changes, and then commit those changes to the branch. Let's say our changes are going to take a month to finish; we would want to commit our work each day or couple of hours so we do not loose anything, but by committing it via version control, if we every realize we were going in the wrong direction, we can always recover some previous version. Only after we have made all of our changes and run the branch program to test it, will we merge our branch back to our main which then replaces the original program with the new version while still keeping a historical version of the original. 
@@ -122,7 +120,7 @@ Because this is a new file, everything is shaded in green. We will add the comme
 
 But we made four directories on our compuater, why are they not here? Simple, we did not "stage" them and thus we did not tell `Git` to track them. This is actually helpful because we may not want to "track" via `Git` any raw data files because there are more complex ways you need to deal with very large datafiles and because the raw datafiles should never change anyway so tracking them with `Git` just makes `Git`'s job harder for no reason. What you can do is upload a copy of the files to your GitHub repo directly through the browser so that you have a backup, but then to also have a copy on your local computer with which you will work. 
 
-### Your First Pull
+## Your First Pull
 
 Since you do not have a co-author on this project, we need to simulate someone making a change to the files on the repo. To simulate this, double-click on the "First.R" file and then click on the pen in the upper-right cornoer of the GitHub page. This will enter you into the editor in GitHub. Once here, enter the following commands in the script.
 
