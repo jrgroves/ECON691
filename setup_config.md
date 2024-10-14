@@ -1,4 +1,7 @@
-# Setup and Configuration
+
+
+
+# Setup, Configuration, and Brief Tour
 Now that we have the programs installed using the default options, we need to make some configuration changes and setup some options within the software. 
 
 ## GIT Identification
