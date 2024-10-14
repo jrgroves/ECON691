@@ -47,7 +47,7 @@ We see that our dataframe contains information about the date and time of the si
 
 To see our dataframe we can access it in a few ways. The worse way would be to simply type in **ufo** into the console. The method we use should be dictated by the goal. If we are simply checking to make sure all is well with the data, we can use the *head()* or *tail()* command. Using this for any object will hgive you the first six rows of the dataframe or last six rows, respectively. This gives us a feel for our data. If we want to see the entire dataframe, we can use the command *view()* which will open a spreadsheet like tab in our editor window space in which we can scroll through the entire dataframe. We can only view this, however, we can not edit anything. We can open a special editing window, but remember, we want to track all of our edits so we will avoid doing that. 
 
-To get some practise with what we have done so far, use the green plus in the upper-left side of the `R Studio` window and choose "R Script" to creat a new script. In the fresh tab that opens in the editor, type of the code to clear the environement and then read in the "scrubbed.csv" file into the environment as the object **ufo**. Try to do it yourself, but the code is below to help.
+To get some practise with what we have done so far, use the green plus in the upper-left side of the `R Studio` window and choose "R Script" to creat a new script. In the fresh tab that opens in the editor, type of the code to clear the environement and then read in the "scrubbed.csv" file into the environment as the object **ufo**. Once you complete this, save it as "setup" using the blue disk in the editor. Try to do it yourself, but the code is below to help.
 
 <details>
   <summary>Example: Scripting the X Files</summary>
@@ -57,6 +57,7 @@ To get some practise with what we have done so far, use the green plus in the up
     ufo <- read.csv(file = "./Data/scrubbed.csv", header = TRUE, as.is = TRUE)
 ```  
 </details>
+
 
 ## API Downloads
 Another means of obtaining data, especially commonly sourced data, is to use an Application Programming Interface (API) command. An API is an interface between two programs to exchange information.[^2] The most common type of API is a REST API which uses commands such as *get()*, *put()*, and *delete()*, to transfer data via HTTP protocals. Each different API will have different requirements to setup communications; however, most use some sort of key and then a means of sending the *get()* command to obtain data. 
@@ -69,62 +70,59 @@ For our work, we will learn to access the U.S. Census API which allows us to cod
 
 ### Working with Census Data via API
 
-Specifically the census data that we are going to working with is the ACS or American Community Survey. This is data collected by the Census every year and is used to fill in the gaps bewteen the full 10-year census carried out. In short, they do sample surveys of areas and utilize statistics to infer the population level statistics and then report them, at various geographic levels, along with the margin of error. While the data is collected every year, the more detailed the geographic unit being reported, the more survey years that are merged and reported. For example, State and National data are released every year; however, census tract or census block group data is reported every year but the data is a five-year moving average. 
+Specifically the census data that we are going to working with is the ACS or American Community Survey. This is data collected by the Census every year and is used to fill in the gaps bewteen the full 10-year census carried out. In short, they do sample surveys of areas and utilize statistics to infer the population level statistics and then report them, at various geographic levels, along with the margin of error. While the data is collected every year, the more detailed the geographic unit being reported, the more survey years that are merged and reported. For example, State and National data are released every year; however, census tract or census block group data is reported every year but the data is a five-year moving average. Additionally, datasource is that is already linked to Geographic Information System (GIS) data so we can also use these files to draw maps as a means of visualizing the data or use geography as the necessary common element to merge data from different sources. 
 
-Another advantage of using this datasource is that is already linked to geographic information system data so we can also use these files to draw maps as a means of visualizing the data we get. So our first exercise to learn how to use an API and work with data is to create a map showing the percentage of the median rent to the median income by county in the state of Illinois. 
+This will also give us a opportunity to start working with packages which are add-ons to the base `R` that really give `R` its power. These are created by other users and can commonly be found and installed from either `GitHub` or the Comprehensive R Archive Network (CRAN). What is good about obtaining a package from CRAN over GitHub is that the former ensures that the package operates within the current version of `R` and adds a since of security. That said, obtaining a package from `GitHub` is not unheard of and should not be instantly ruled out. Utilizing any package requires two key steps: installing it on your local devise and loading it into the `R` environment. Everything we had done so far is included in what is called "base R" but that is very limited. There are two ways to install a package onto your local machine: via the command line and via `R Studio`. We will do both. 
 
-### *Tidycensus* Package
+For a command line install, we use the command *install.packages()* and then input the name of the package, in quotations, as the arguement. So in your console type `install.packages("tidycensus")` and hit enter. You will either get some red text or a list of CRAN archieve mirrors from which to choose. If the latter, then make a choice (preferably within the US since that is where we are located) and hit enter. If the former, ignore the text "WARNING: Rtools is required..." because we will not be creating any packages ourselves so we do not need this additional package. The rest of the text should tell you from where the package is being downloaded and where it is being installed. Finally it sould tell you the package was upacked sucessfully and the MD5 sums check out indicating it is not currupted. The alternative method is to move you mouse to the menu across the top of `R Studio` to "TOOLS --> INSTALL PACKAGES...". In the window that opens, type "tidycensus" in the blank spot. The top option is either a CRAN location or local package and the lower option is where to install it. This should be in the local directory for our library we set up in our previous lecture. If you do this, you will see a similar output as we did using the command line. 
 
-First we start by installing the *tidycensus* pacakge to our machine because we will need that. Secondly, we need to let the U.S> Census Beurua know who we are by registering and obtaining an API Key. This is free and is simply a means of keeping tabs on who is accessing the database for what use. To obtain a key, go to the [Census Key Website](https://api.census.gov/data/key_signup.html) and fill in your name, email address and agree to the terms of service. Your key will now be sent to you in your email account. While we wait for that email to arrive, we need to setup R Studio to install the key into our R base code so that we do not have to input it everytime we want to utilize the Census API. 
+The next task is to load this library into the current environment so we can use its commands. One command we will use is *get_acs()* and notice if you type it in the console now, you get an error stating that `R` can not find this command. The command to load an package is *library()* with the package name (not in quotations) as the argument. Since we are keeping track of what we are going, open the script "setup", if not still open, and go to the top. Add a few empty lines under the command `rm(list = ls())` and in one of those, add the command `library(tidycensus)` and then save the file. Now source the script to run the entire thing. In the environment tab you should see your object **ufo** and nothing else. To verify that the library was loaded, use the *get_acs()* command again and notice the different error message. 
 
-In the console, run the following two lines of code (they will run as soon as you hit enter):
+> NOTE: The clean environment command MUST be at the top of the script and everything, including loading packages, must come after, otherwise they too will be removed. The clear environment does exactly that: it wipes EVERYTHING except base `R` from the current R memory.
+
+Everytime we access the Census API, like any other, we will have to identify ourselves with our key. You should have received and saved an email from the U.S. Census with this key in it. While we could add the key to the *get()* command everytime we use it, a better alternative is to simply install the key into our perment R enviornment much the same way we changed the location of our package library. Fortunately for us, however, the creators of *tidycensus* created a function (or command) to do this for us. To utilize this, type the following into the console (because we only need do this once) and replace the text 'key' with the key you received (but keep the quotations because you are entering as a character). If this is the first time, set the install option to TRUE and the overwrite to FALSE. If you just want to temporarily change the key (for whatever reason), you would reverse those option settings. 
+
 ```R
-library(tidycensus)
 census_api_key("key", overwrite = FALSE, install = TRUE)
 ```
-You just want to make sure that where the code says "key" you input the key you recieved in your email. This line of code is instructing R to install this key so you can use the Census API anytime you need it. If you ever need to replace the key, you simply set "overwrite" to TRUE.
 
 The syntax of the *tidycensus* package is based on an API call and you can choose from two different sources at this time: "acs" and "decinial". The former is what we will use and the latter is the data from the 10-year population census. The ACS data only goes back to about 2001 (depending on the level you are looking for) and the decinial API only have 1990, 2000, 2010, and some 2020 data. The basic command we will be using is:
 ```R
+
 acs <- get_acs(geography = "county",	#defines geography level of data 
-               variables = vars,	#specifics the data we want 
-               state = 17,	        #denotes the specific state 
-               year = 2021,	        #denotes the year
-               geometry = TRUE)	#downloads the TIGER shapefile data  
+               variables = vars,	    #specifics the data we want 
+               state = 17,	          #denotes the specific state 
+               year = 2021,	         #denotes the year
+               geometry = TRUE)	     #downloads the TIGER shapefile data  
 ```
+
 The command `get_acs` is the command to pull data from the ACS API and then we have to fill in the necessary elements to help the software find our data. The first is `geography` and this denotes what level of analysis we want. What we put here will dictate which of the surveys (1-Year of 5-Year) the API will pull from. Next we have our `varaibles` and we will return to that momentarily. Notice, however, that rather than a character string, we have an object here because we have defined an object previously that gives a list of the varaibles we want. We do this for simplicity and to limit out calls to the API. Next up we have our `state` and notice that we have a number, not a name or an object. Every geographic level of analysis that the census (and most every other federal data source created) as a unique identifier called FIPS Code. The FIPS stands for Federal Information Processing System and the code can be from two to (I think) thirteen characters long with the longer codes referencing more fine level data. For example, DeKalb County has a FIPS code of 017037 with the first three numbers indicating the state (Illinois and the leading zero is usually dropped) and the next three indicate the county (DeKalb County). If we looked at finer levels within the county, we would see additional values added to this code to inditify them. Based on this information, we can see that we are looking for the state of Illinois by using its FIPS code of 17. Next we have the `year` and this indicates what year were want the data from. We are asking for data from 2021 and, except for the 1-Year data files, this is the most recent that has been released at this point. Since we will be pulling from the 5-Year data files, we know that the data is from the surveyes dating from 2021, 2020, 2019, 2018, and 2017. Finally we have a command `geometry` and it is a logical arguement set to "TRUE". This will pull the necessary data to create polygons for each county. If we only want the data, we can set to this FALSE, but since we want to visualize the data we will keep it set to TRUE.
 
-Just a comment about that is NOT here. For example, we have no entry for `county` and this is because we want all counties within our state. If we only wanted a subset of counties, we could either create a character vector with the FIPS codes for the counties we want or listed their names (however, FIPS code ensure fewer errors). Another case where we might need a county is if we choose "block group" as our geography level. Block Groups are a unit comprise of several census blocks and when one combines several block groups, one gets the census tract. For example, inside of DeKalb County, there are twenty-one census tracts composed of sixty block groups. The FIPS code for block group 4 within census tract 9 of DeKalb County is 170370009004. Breaking this down, we have "17" as the state, "037" as the county, "0009" as the census tract and "004" as the block group. If we were to simply replace "county" with "block group" in the above code, we would download the entire set of blockgroups for the entire state of Illinois (a dataset with 9,691 observations).
+> NOTE: A comment about what is *NOT* here. For example, we have no entry for which `county` we want and this is because we want all counties within our state. If we only wanted a subset of counties, we could either create a character vector with the FIPS codes for the counties we want or listed their names (however, FIPS code ensure fewer errors). Another case where we might need to designate a specific county is if we choose "block group" as our geography level. Block Groups are a unit comprise of several census blocks and when one combines several block groups, one gets the census tract. For example, inside of DeKalb County, there are twenty-one census tracts composed of sixty block groups each. The FIPS code for block group 4 within census tract 9 of DeKalb County is 170370009004. Breaking this down, we have "17" as the state, "037" as the county, "0009" as the census tract and "004" as the block group. If we were to simply replace "county" with "block group" in the above code, we would download the entire set of blockgroups for the entire state of Illinois (a dataset with 9,691 observations).
 
 ### Variables and the Census  
 
-The U.S. Census has data on several different aspects of american life, but they can mainly be broken down into demographic characteristics (items about the people in the population) and housing characteristics (items about the structures in the built enviornment). Finding the "name" of the data that you want is not necessarily the easiest thing to do, but there area  few tools to help you. One is to use the [Census website data center](https://data.census.gov/table/) and use this to search for your data. Since we want to utilize R and R-Studio, we are going to use the *tidycensus* and *tidyverse* to help us find our data. To do this, let's start a script and after clearing our environment, load the two packages *tidycensus* and *tidyverse*. Next, type in the following code and then run your script.
+The U.S. Census has data on several different aspects of american life, but they can mainly be broken down into demographic characteristics (items about the people in the population) and housing characteristics (items about the structures in the built enviornment). Finding the "name" of the data that you want is not necessarily the easiest thing to do, but there are a few tools to help you. One is to use the [Census website data center](https://data.census.gov/table/) and use this to search for your data. Another is built into the *tidycensus* package which allows us to create an object with the names and ids for all of the data series avaliable for any given year and any given survey, along with the smallest geography reported. To crate such an object, use the command below in the console. 
 ```R
-var <- load_varaibles(2021, "acs5", cache = TRUE)
+acs <- load_variables(year = 2021, dataset = "acs5"))
 ```
-After you do this, you should have an object inside your environment called **var** with about 27,886 observationsand 4 columns. This the complete list of everything we can call up from the 2021 ACS 5-Year datafile at every possible geographic level. We want to limit this down to two items: "Median Income" and "Median Rent". To do this, we fill first call up `head(var)` and we see that the "Name" is a alphanumeric code staring with "B" and then we see "lable" and "concept" which each tells us about the variable. We are going to exploit the "concept" column and use our `filter()` and `grepl()` commands to filter our **var** object to only those that contain the phrase "median income". Recall that R is case sensitive so we need to note that the text in the "concept" column is in all caps so we need to replicate that in our code. Specifically, the code will be:
+
+Using the *head()* command we get:
+
 ```R
-data <- var %>%
-    filter(grepl("MEDIAN INCOME", concept))
+> head(acs)
+# A tibble: 6 × 4
+  name        label                                   concept                  geography
+  <chr>       <chr>                                   <chr>                    <chr>    
+1 B01001A_001 Estimate!!Total:                        SEX BY AGE (WHITE ALONE) tract    
+2 B01001A_002 Estimate!!Total:!!Male:                 SEX BY AGE (WHITE ALONE) tract    
+3 B01001A_003 Estimate!!Total:!!Male:!!Under 5 years  SEX BY AGE (WHITE ALONE) tract    
+4 B01001A_004 Estimate!!Total:!!Male:!!5 to 9 years   SEX BY AGE (WHITE ALONE) tract    
+5 B01001A_005 Estimate!!Total:!!Male:!!10 to 14 years SEX BY AGE (WHITE ALONE) tract    
+6 B01001A_006 Estimate!!Total:!!Male:!!15 to 17 years SEX BY AGE (WHITE ALONE) tract
 ```
-This code uses our pipped coding technique telling R to create a new object called **data** that uses the object **var** and then limit it to only those cases in "concept" where the text string "MEDIAN INCOME" exists. This creates an object with 46 observations. If we double-click the **data** object, it will open in our data viewer and once we adjust the column widths, we see the following:
-![image](https://github.com/jrgroves/ECON691/assets/52717006/5df016f5-2e04-4f4d-abcb-d820e66f75c9)
-We do not want the observations for Puerto Rico and it looks like the most comprehsive measure we can find would be named "B06001". Notice that there are subgroups under that name with different measures. Specifically, "B06001_001" is the data on the Median Income of all Americans that is adjusted to 2021 dollars while "B06001_002" is the same, but only for individual born in the same state where they current reside. Depending on the question you are asking, you might need these other subgroups. Since we have found part of what we are looking for, go back to our script, and under the point were we loaded the library, let's create an object called **variable** and for now assign it the text string "B06001_001".
 
-We will find the median rent the same way; however, this will also demostrait that the process does take some trial-and-error sometimes. To see this, replace the "MEDIAN INCOME" in the code that filters our variable list from the ACS with "MEDIAN RENT" and then run the code. We see the resulting output has zero observations. The next iterration might be to replace "MEDIAN RENT" with just "RENT" and when we do this we get back almost 2,000 observations that we have to look through. To see if we can narrow this down further, remember that the idea of pipped coding it to essentially say to R, "do this and then, with what you get, do this next thing". Toward that end, let's add a line of code that filters the results when we look for the world "RENT" to then look for the word "MEDIAN". To do this, add another pipped character (`%>%`) and then the code `filter(grepl("MEDIAN", concept))`. Run that and we are down to only 68 observations. 
-
-Another thing you must be careful with when pull down data is to make sure you know what it is you are pulling down. Looking through these data points you will see two possibilities stick out; "MEDIAN GROSS RENT" and "MEDIAN CONTRACT RENT". So what is the difference? This is where the documentation for datasets and databases comes in handy. However, looking direcly for the ACS 5-Year documentation, we can just google search the term and we will see that the former includes the cost of utilitiles while the latter contains only the lease price of rent. This is where you make a judgement call as to what better captures what you are looking for. In our case, we want to focus on the lease rent under the assumption that individuals have some control over their utility bills using alternative means of keep warm or cool, and we see that the name of that is "B25058_001". Let's add this to our script in our **variable** object. The code should be: `variable <- c("B06001_001", "B25058_001")`  
-
-With these defined our are variables, we can now run our code to access the Census API and pull down this data, at the county level, for the State of Illinois in 2021. We do this using our `get_acs()` code located further up this page. This this is complete, you can check your data using the `head(acs)` command and you should have a dataframe with 204 Observations and 6 variables. You should also see in your console information about the grography of the data because this called an "sf" object that can also be linked geogrphically to other datasets.
-
-
-
-
-
-
-
-
-
+We can again, use the command *view()* and then hit CTRL+F to open the "find" task in the viewer and type in "Education" to highlight the different variables measuring eductiaon attainment. Our goal is to find the name that we will use to get the required data for our purposes. To get a feel for using this command, however, copy the following code block. Before you do that, use the viewer and finding tool to figure out what dataset we are getting with this code.
 
 ```R
 cen.stat <- get_acs(geography = "state", 
@@ -133,27 +131,17 @@ cen.stat <- get_acs(geography = "state",
                    survey = "acs5",
                    geometry = TRUE)
 ```
-[^2]: https://walker-data.com/tidycensus/articles/basic-usage.html
-
-Breaking down this command, we first choose the geographic level of the data we are seeking, in this case, the level of the state. If we wanted a specific state, we could add the option "state = ##" where would choose the state FIPS code. All census geographics can be uniquely identified with a FIPS code. For example, the FIPS code for the DeKalb county is 17037. In this case the '17' is the State code for Illinois and '037' is the County code for DeKalb. The next option is "variables" which is where we indicate what data we wish to download. Unfortunately there is a great deal of possible data and finding the right dataset is not always simple. That said, the *tidycensus* package as a means to filter the possbilities using the API and R.
-
-Copy and paste the following code:
-```R
-data.list <-  load_variables(2020, "acs5", cache = TRUE)
-```
-Breaking down this code we see the command *load_varaibles()* with the first option showing the year we want the list of possible datasets, the second denoting the survey, here the 5-year ACS files, and the final places the data in our computers cahce for future use. We will learn how to filter this very large object to find the varaibles that will fit out needs. For now just know that the variable name we have put in our *get()* command will give us the total population.
-
-The next two options, we have mostly covered already. The option "year" denotes the year of the data we wish and the option "survey", again, denote the specific survey we want to use. Finally, we have the option "geometry" set equal to TRUE. This will download the TIGER map files for this data and turn out standard dataframe into an "sf" object which stands for "simple feature" object. Specifically, it will allow us to plot a map. 
-
-Using our *head()* command, we see the dataframe contains a column for the GEIOD (which is the FIPS code), the name of the state, the variables we downloaded, in this case just one, the estimate of that varaible, the margin of error for that estimate, a column called geometry which contains the corridants needed to plot the map of the states. 
-```R
-plot(cen.stat$geometry)
-```
-Using this will create a plot of the United State in the viewer of `R Studio`.
+Finally, for a bit of fun, type `plot(cen.stat$geomerty)` and hit enter. What happens?
 
 ## Web Scrape
 
 Another, and more complicated, means of obtaining data is through web scraping. This is the action of utilization of the fact that website are nothing but code that is translated by your browser into a visual form. As a result, there are methods of coping the html code into a program, such as R, and then filtering the code for the information you are looking for. We are not going to do an example of this given the complexity, but there are several sources of tutorials that can be found by searching for web scraping in `R`.[^3] 
+
+
+
+
+
+
 
 
 
