@@ -40,8 +40,17 @@ To pratice this in our example, we are going to modify our README.md file inside
 # Groves_R
 This is the in-class work for the Introduction to R in Economics 691. You will need to copy of the location or URL of this repository which you will find in the address bar of the browser.
 ```
+Using what you recall from previous classes on markdown, add a sub-heading with your last name and then a line under that indicating in some way that this is you copy of the class repository and then save this new file using the disk icon in the upper-left of the editor window. If you get lost or do not recall, an example is below.
+<details>
+  <summary> Example: Push and Pull #1 </summary>
+```bash
+# Groves_R
+This is the in-class work for the Introduction to R in Economics 691. You will need to copy of the location or URL of this repository which you will find in the address bar of the browser.
 
-[detail
+## Groves_R
+This is my own personal copy of the main repository for the Introduction to R in Economics 691 taught by the balding guy!
+```
+</details>
 
 start a script file so go to the File --> New File --> R Script and start a fresh script in our editor window. When writing a script, everything we type is going to be "read" by `R` as a command unless we tell it otherwise. This is where commenting comes in. Commenting allows us to leave notes for ourselves or others about what is going one in the program to help both ourselves and others remember or understand what is going on. In an `R` script we can "comment" out a line by starting it with **#** (hash mark) and then everything after that mark will be ignored by `R`. note that we can put this at the start of the line to have `R` ignore everything or we can place it anywhere else on the line to have `R` ignore everything to the right of the mark. In the spirit of readability and reproducability, we should always start a new script with some basic information telling a reader what this script is supposed to do, note anything that should be done prior to running this script, who wrote the script and when, and any updates or major changes. So in your editor, input the following lines with the relevant information.
 
