@@ -1,7 +1,8 @@
+---
+title: Setup, Configuration, and Brief Tour
+---
 
-
-
-# Setup, Configuration, and Brief Tour
+# Setup and Configuration
 Now that we have the programs installed using the default options, we need to make some configuration changes and setup some options within the software. 
 
 ## GIT Identification
@@ -37,6 +38,8 @@ Another nice package we will use frequently is the *tidyverse* package which is 
 install_packages("tidyverse")
 ```
 </details>
+
+# Brief Tour
 
 ## R-Studio and Git/GitHub
 Next we want to link `R Studio` with `Git` and allow it to access GitHub. We will discuss `R Studio` more later, but it is basically a Graphic User Interface (GUI) that combines several data tools and allows use to more easily interact with `R` which is a command-line based program. We do not have to use `R Studio` to utilize the feature of Git or GitHub because we can use the command line prompts (Git Bash) for that as well. Since `R Studio` provides a standard means of interacting with `R`, especially for novice users, we will continue to use this. With `R Studio` still open, go to the menu across the top of the screen and locate `TOOLS --> GLOBAL OPTIONS` and a smaller screen will open. Along the left side, click on the part that states `GIT/SVN` and then make sure the box at the top is checked and then in the area below "Git Executable" you need to navigate to the `git.exe` file. On a PC, it will be located at `C:/Program Files/Git/bin/git.exe`. You can either type this address in or you can naviagate to it via the Browse button. Once this box is filled in, click Apply and then Okay.
