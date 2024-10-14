@@ -1,18 +1,62 @@
+---
+title: The X Files
+---
+
 # Getting Data
 
-The core of any emperical research project is the data and, depending on your project and level of analysis, obtaining that data can be easy or hard. Chances are, however, that the easier the data is to obtain, the less ripe that avenue of research is, although that is not always the case. More often than not, the data you want is not going be a simple point-and-click away, you are going to need to find creative means to put the data together. One of the key elements that you need to keep in mind is the need for reproducability and that means keeping your data in its rawist form and track, preferablly via code, any changes you make to that raw data. 
+The core of any emperical research project is the data and, depending on your project and level of analysis, obtaining that data can be easy or hard. Chances are, at least in Microeconomic analysis, the easier the data is to obtain, the less ripe that avenue of research is. More often than not, the data you want is not going be a simple point-and-click away, you are going to need to find creative means to put the data together and so we will look at some various means of getting data. Additionally, it is more than likely that you will be bringing some of the data in from elsewhere and so we need to see how to read data into our `R environment` so that we can use it for our analysis. Finally, we will likely need to join up data from a variety of different sources to get the full dataset we need to perform a correct analysis. 
 
-## Delimiated Files
+Another important factor to keep in mind is that of the need for reproducability. In terms of obtaining, cleaning, and merging datasets, that means that we want to keep the data we bring into our analysis as raw as possible and do any manipulation and merging within `R` via a script. This not only preserves the original copy of the data, but also ensures we have a written record, via the script of what we did and how we got the data we eventually used. 
 
-The best way to store raw data is in an independent form such as a text or deliniated file. Data kept in propriety form will add a barrier to reproducability, especially if that program is no longer widely avalible whereas data in simple text of deliniated form can always be read. The most common form of data is saved as a .csv file which is a text file where each "column" of data is seperated by a comma. In this case you can simply use the *read.csv()* command to read the data into the global environment of R. Using the command below will read the .csv file into the environment and saved to the object "ufo".
+## Delimited Files
+
+The best way to store raw data is in an independent form such as a delimited file, also known as delimiter-separated value, which is a text version of a file with some special character, commonly a "tab" or a "comma" used to seperate elements of an observation with each observation being on a single line. Data kept in propriety form will add a barrier to reproducability, especially if that program is no longer widely avalible whereas data in simple text of deliniated form can always be read. The most common form of data is saved as a .csv file which is a text file where each "column" of data is seperated by a comma. In this case you can simply use the *read.csv()* command to read the data into the global environment of `R`. As a project for our examples and assignments we will be utilizing data which tracts UFO sighting across the global from about 1910 which I obtained from the kaggle website[^1]. Using the command below will read the .csv file into the environment and saved to the object "ufo".
+
+[^1]: https://www.kaggle.com/datasets/NUFORC/ufo-sightings?resource=download 
 
 ```R
 ufo <- read.csv(file = "./Data/scrubbed.csv", header = TRUE, as.is = TRUE, sep = ",")
 ```
 
-Looking at this command, there is one note we should make; there is an alternative version called *read.csv2()*. The difference is that the command above treates commas as sperators and periods as decimals whereas the latter assumes that periods are the seperators while commas are used as decimals. Now diving into the command we see first we list the location of the file and filename we want to read. Again we notice the use of the period to indicate the current working directory. Next we set the option "header" to TRUE to indicate that the first row of the data are column headers and thus should be used as the column names in the resulting dataframe. Next we tell `R` to read the file as it is formated meaning that characters are read as character and numbers are read as numeric. Finally, we have the option "sep" which sets the seperator for the deliminated file. The default is the comma, however, we can also use other options such as the bar "|". 
+Before breaking down this command, there is one note we should make; there is an alternative version called *read.csv2()*. The difference is that the command above treates commas as sperators and periods as decimals whereas the latter assumes that periods are the seperators while commas are used as decimals. Now diving into the command we see first we list the location of the file and filename we want to read. Again we notice the use of the period to indicate the current working directory. Next we set the option "header" to TRUE to indicate that the first row of the data are column headers and thus should be used as the column names in the resulting dataframe. Next we tell `R` to read the file as it is formated meaning that characters are read as character and numbers are read as numeric. Finally, we have the option "sep" which sets the seperator for the deliminated file. The default is the comma, however, we can also use other options such as the bar "|". Running this command creates the object **ufo** and assign the data from the file "scrubbed.csv".  
 
-Running this command creates the object **ufo** and assign the dataframe from the file "scrubbed.csv" and we can read the heading of this file using the *head()* command. 
+Recall that `R` is an object-based language and the most common form of an object is a vector. This is what we created with our first script we wrote when we created the object **A**. The thing about vectors, however, is that they must be constructed of a single type of data meaning that we can not mix numerical and character data within the same vector (unless we translate the numerical data to a character type). You either still have the A in your environment or you can replace it by openeing the file "First.R" and then placing your curser in the editor window on the line that assigns the object **A** and clicking the "Run" button at the top of the editor window. Once this is done, type `is(A)` into the console and you will see 
+
+```R
+> is(A)
+[1] "character"           "vector"              "data.frameRowLabels" "SuperClassMethod"
+```
+
+The key information here is that this is a "character" type and that A is a vector. We can add to this vector using the code `A[2]<-"Goodbye"` and now if we type **A** into the console we see we have both "Hello world!" and "Goodbye". We have a vector with two pieces of data, both of which are characters, and we can access them using the brackets and numbers just like with matrix vectors. Now type `A[3] <- 50` and hit enter and you see see that "50" is not listed in the environment as part of the vector object **A**. Finally, type `A[3]/5` and see what happens; you should get an error message. This is because a vector can only be of one type of data and when we entered 50 into a vector that is already made up on character types, R automatically assumed we meanth the character 50, not the number 50. 
+
+Now type `B <- 50` and then type `B[1]`. You should get a read out in the console of 50 without quotation marks as quotations is a visual cue that the output is character not numeric. Now type `B[1]/5` and you should get 10. To see why, use the *is()* command to determine what object **B** is. You should see if it a numeric vector.
+
+> What do you think will happen if you try to add the phrase "Over the Hill" to object B?
+
+Typically, as is the case of our **ufo** object, we will need something with both numberical and character data along with other types and classes. To contain this, we need something else called a dataframe. Using the *is()* command we see that our object **ufo** is a dataframe made up of vectors. You can think of this as a matrix type element constructed of column vectors where each column vector contains data of a similar type. Another way to think of it is like an Excel spreadsheet. Because the object is a dataframe or a set of vectors, each vector or column of our dataframe has a name by which we can access and manipulate that vector. To get a list of names we simply use the command *names()* and input our dataframe (or other object) as the arguement. 
+
+```R
+> names(ufo)
+ [1] "datetime"             "city"                 "state"                "country"             
+ [5] "shape"                "duration..seconds."   "duration..hours.min." "comments"            
+ [9] "date.posted"          "latitude"             "longitude"
+```
+We see that our dataframe contains information about the date and time of the sighting, the city, state, and country of the sighting, the shape of the object seen, how long it was visable in both seconds and hours, some comments about the sighting, the date the information was posted in the main dataset and finally the latitude and longitude of the sighting location. 
+
+> NOTE: DO NOT use spaces in names of objects or vectors within a dataframe. Either use camelBack (capitlization of each word with no spaces), periods, or underscores. While it is possible to use spaces, it can create major complications and more often than not will lead to errors in running your code and confusion in reading your code.
+
+To see our dataframe we can access it in a few ways. The worse way would be to simply type in **ufo** into the console. The method we use should be dictated by the goal. If we are simply checking to make sure all is well with the data, we can use the *head()* or *tail()* command. Using this for any object will hgive you the first six rows of the dataframe or last six rows, respectively. This gives us a feel for our data. If we want to see the entire dataframe, we can use the command *view()* which will open a spreadsheet like tab in our editor window space in which we can scroll through the entire dataframe. We can only view this, however, we can not edit anything. We can open a special editing window, but remember, we want to track all of our edits so we will avoid doing that. 
+
+To get some practise with what we have done so far, use the green plus in the upper-left side of the `R Studio` window and choose "R Script" to creat a new script. In the fresh tab that opens in the editor, type of the code to clear the environement and then read in the "scrubbed.csv" file into the environment as the object **ufo**. Try to do it yourself, but the code is below to help.
+
+<details>
+  <summary>Example: Scripting the X Files</summary>
+
+  ```R
+    rm(list = ls())
+    ufo <- read.csv(file = "./Data/scrubbed.csv", header = TRUE, as.is = TRUE)
+```  
+</details>
 
 ## API Downloads
 
