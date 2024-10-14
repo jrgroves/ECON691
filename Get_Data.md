@@ -1,5 +1,5 @@
 ---
-title: The X Files
+title: Getting the X Files
 ---
 
 # Getting Data
