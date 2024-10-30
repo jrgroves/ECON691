@@ -4,9 +4,11 @@ title: Getting the X Files
 
 # Getting Data
 
-The core of any emperical research project is the data and, depending on your project and level of analysis, obtaining that data can be easy or hard. Chances are, at least in Microeconomic analysis, the easier the data is to obtain, the less ripe that avenue of research is. More often than not, the data you want is not going be a simple point-and-click away, you are going to need to find creative means to put the data together and so we will look at some various means of getting data. Additionally, it is more than likely that you will be bringing some of the data in from elsewhere and so we need to see how to read data into our `R environment` so that we can use it for our analysis. Finally, we will likely need to join up data from a variety of different sources to get the full dataset we need to perform a correct analysis. 
+The core of any empirical research project is the data, and depending on your project and level of analysis, obtaining that data can be easy or hard. In microeconomic analysis, the easier the data is to obtain, the less ripe that avenue of research is likely to be. More often than not, the data you want is not going to be a simple point-and-click away. You'll need to find creative means to put the data together, so we'll look at various methods for obtaining data.
 
-Another important factor to keep in mind is that of the need for reproducability. In terms of obtaining, cleaning, and merging datasets, that means that we want to keep the data we bring into our analysis as raw as possible and do any manipulation and merging within `R` via a script. This not only preserves the original copy of the data, but also ensures we have a written record, via the script of what we did and how we got the data we eventually used. 
+Additionally, it is more than likely that you will be bringing in some of the data from elsewhere, and so we need to learn how to read data into our `R environment` for analysis. Finally, we will likely need to join data from various sources to get the full dataset needed for a correct analysis.
+
+Another important factor to keep in mind is the need for reproducibility. In terms of obtaining, cleaning, and merging datasets, we should keep the data we bring into our analysis as raw as possible and do any manipulation and merging within `R` via a script. This not only preserves the original copy of the data but also ensures we have a written record, via the script, of what we did and how we got the data we eventually used.
 
 ## Delimited Files
 
