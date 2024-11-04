@@ -59,7 +59,7 @@ Now lets go ahead and install a couple of libraries by opening `R Studio` and lo
 Another nice package we will use frequently is the *tidyverse* package which is a collection of several packages that make getting, clearning, manipulating, and visualizing data of various types (numbers, character strings, dates, ect.) much easier and intuitive. How do you think you would install this package?
 
 <details>
-  <summary> Example </summary>
+  <summary> Answer </summary>
   
 ```R 
 install_packages("tidyverse")
