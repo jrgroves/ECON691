@@ -235,8 +235,8 @@ Once we get the date of the sighting, we want to get the year from that date and
 <strong> Exercise: Cleaning up the census </strong>
   
 Let us practice what we have learned about pipped commands and data cleaning. When you used the census API to create the object **cen.stat** you also pulled down the data necessary to create a map of the United States. To create this map, use the following code: `plot(cen.stat$geometry)`. Notice that beyond the continental U.S., we get an odd looking image because we have the Alaskan island on the far right and also have the Hawaiian Islands and Puerto Rico. Your exercise is to write and run a code that will create a dataframe that we can map only the centennial U.S. with. The new dataframe should be named **cen.map**, contain only the columns GEOID, NAME, and geometry. To check your work, use the command *plot(cen.map)*.
-
-<strong>Answer</strong>
+<details>
+<summary>Answer</summary>
   First we look up on Google the FIPS code for the three territories we want to remove and see that Alaska is '02', Hawaii is '15' and Puerto Rico is '72'. We then use the following code.
     
 ```R
@@ -249,6 +249,8 @@ Let us practice what we have learned about pipped commands and data cleaning. Wh
       arrange(GEOID)
 	  
 ```
+</details>
+
 ## Creating "new" Data
 
 Most of the time in your research, you will have "parts" of the data that you need, but it will be at the wrong aggregation level or not be connected into a single database. This is another advantage of learning coding and how to think about data. Let's say we need to take our ufo siting data and we need to show how the number of sightings has changed, by state, since the 1970's and then we need to visualize that in a form that is easily digestible by a non-economics audience. To complete this project, we need to first determine what it is that we need, think about where to get that, and then what we might need to do to the data to bring it all together. 
