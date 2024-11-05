@@ -257,7 +257,7 @@ Most of the time in your research, you will have "parts" of the data that you ne
 
 We know that we have the state listed in our **ufo** object so we can use that to aggregate, assuming they are all correct, and then we know that we can draw a map with our census dataframe. A couple of obstacles we need to overcome are that the state names in our two datasets are not formatted correctly and we need to figure out how to draw different maps for each decade. Let's start by aggregating our data.
 
-### Data Grouping and aggregation
+### Data Grouping and Aggregation
 
 My first step would be a quick Google search for how to count occurrences of a variable in `R` and I would likely find that the answer is in the `count()` command in *tidyverse*. Looking up the information for this command I see that I can accomplish my goal with the following two lines of code:
 
@@ -266,11 +266,13 @@ My first step would be a quick Google search for how to count occurrences of a v
 		count(state, decade)
 ```
 
-After running this, I get a new dataframe named **ufo.st** that contains only three vectors: state, decade, and n with the last vector being the number of times each state code was found in the data during each decade. Now I need to bridge this to the census map data. I could mannually enter the two letter abbreviation for each state and the FIPS code, or I could see if someone had done it already and quick Google search shows that the BLS has a nice table that does do this. The problem is that the table is not downloadable so I am going to have to copy and paste. Since I am using a table, I am going to first try to paste the table into Excel and since that does work, I will make this a three column table rather than six, remove the extra header row at the top of the table, and make sure the table names are sufficiently simple. While I could save this as an Excel file and read that into `R`, I would prefer to keep the data in as raw a form as possible, so I will save this as a simple **.csv** file and then put in it my project directory under the **Data** folder as the file **st_abb.csv**.
+After running this, I get a new dataframe named **ufo.st** that contains only three vectors: state, decade, and n with the last vector being the number of times each state code was found in the data during each decade. Now I need to bridge this to the census map data. I could mannually enter the two letter abbreviation for each state and the FIPS code, or I could see if someone had done it already and quick Google search shows that the BLS[^4] has a nice table that does do this. The problem is that the table is not downloadable so I am going to have to copy and paste. Since I am using a table, I am going to first try to paste the table into Excel and since that does work, I will make this a three column table rather than six, remove the extra header row at the top of the table, and make sure the table names are sufficiently simple. While I could save this as an Excel file and read that into `R`, I would prefer to keep the data in as raw a form as possible, so I will save this as a simple **.csv** file and then put in it my project directory under the **Data** folder as the file **st_abb.csv**.
 
-If I was more comfortable with the web scraping coding in `R`, I could have just as easily written a quick code to scrape this table from the BLS website directly and used that table rather than copy and pasting through Excel. This would have been the alternative if the copy and paste did not work or if the table was rather complex. Since it was a simple table, we do it this; however, we will cite the table location in a comment in our code. With this, I can always go back and add this coding or at least will know where the data came from. Under that citation, I will write the code to pull in the data into a dataframe called **st_abb**
+[^4]: https://www.bls.gov/respondents/mwr/electronic-data-interchange/appendix-d-usps-state-abbreviations-and-fips-codes.htm
 
-Unfortunately for us, the state code in the abbreviation bridge and the UFO data are in different cases. This is quickly resolved with a command in the *tidyverse* package called **to_upper()** which will change all the characters in a given vector to uppercase. We will tact this onto our pipped code that aggergates our data using the line `mutate(Abbr = to_upper(state))`
+If I was more comfortable with the web scraping coding in `R`, I could have just as easily written a quick code to scrape this table from the BLS website directly and used that table rather than copy and pasting through Excel. This would have been the alternative if the copy and paste did not work or if the table was rather complex. Since it was a simple table, we do it this way; however, we will cite the table location in a comment in our code. With this, I can always go back and add this coding or at least will know where the data came from. Above that citation, I will write the code to pull in the data into a dataframe called **st_abb** and to keep with my organization, I will add this information under the Loading Data section of the script.
+
+Unfortunately for us, the state code in the abbreviation bridge and the UFO data are in different cases. This is quickly resolved with a command in the *tidyverse* package called **toupper()** which will change all the characters in a given vector to uppercase. We will tact this onto our pipped code that aggergates our data using the line `mutate(Abbr = toupper(state))`
 
 Why did we create this vector with the name "Abbr"? The simple answer is that using this name means our data is matched with the target vector in the **st_abb** dataframe making our join that much easier. Since we are unsure if the data is "correct" in the **ufo** dataframe, we will do a full join to verify everything matches up correctly. Add the line `full_join(., st_abb, by = "Abbr")` and then run the pipped code (assuming we have already read in the abbreviation bridge file. 
 
@@ -290,6 +292,32 @@ If we now try to join, the data will join, but we will have to add an additional
 ufo.map <- cen.map %>%
   left_join(., ufo.st, by="GEOID" )
 ```
+### Data Visualization
+
+We now have a rather large dataframe that contains information about the number of UFO sightings in each state across each decade from 1960 to 2010. We need to convey this information to our client or as part of our research project and running the `summary(ufo.map)` command will not show us much. This is where thoughtful data visualization skills are important. We can convey information in one of two primary ways: a table or an image. Within the *tidyverse* package is the package *ggplot2* which allows for the creation and detailed modification of several key data visualization objects. The first we will work with is a box-plot graph.
+
+A box-plot graph shows information about the interquartile range, median, and outliers, and the code is pretty straightforward. Before we draw the graph, however, we are going to want to group on some of our variables and that is facilitated if we change the vector from character or numeric to a factor. This is also helpful when running regressions because, at least in the basic regression syntax, `R` knows to drop a reference group and you can use the factor command to set your desired reference group. As such, add the code below to the end of the code that creates the dataframe **ufo.map**.
+
+```R
+ %>%
+    mutate(decade = as.factor(decade),
+           state = as.factor(state))
+```
+Next we will add the code block below to create our box-plot graph looking at the change in sightings over the decades. We see the first line calls the `ggplot()` command and tells it the dataframe we will be working with. We can populate this command line with several things or nothing, we just need to know that this will set whatever we put in here as the "global" and apply to ALL subcommands in this sequence. Since we know we are using only one dataframe, we will add it here and then close the line with a `+` sign. 
+
+Next we define the "geom" that we want the package to create. This is the type of image we want to make. You have seen this before with the `geom_sf()` command we used to create the map earlier. Here the geom is the `geom_boxplot()` and within this command we see the command `aes()` which stands are asthetics and it defines the key elements of the graph such as what is on the x-axis and the y-axis. Run this and see what you get.
+
+```R
+  ggplot(ufo.map) +
+    geom_boxplot(aes(x = decade, y = n))
+```
+> Exercise
+> Create a new box plot where we see the summary for each state rather than each decade
+> <details>
+>	<summary>Answer</summary>
+> 	`Replace 'x = decade' with 'x = state'`
+> </details>
+
 
 
 
