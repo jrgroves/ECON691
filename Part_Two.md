@@ -318,6 +318,34 @@ Next we define the "geom" that we want the package to create. This is the type o
 > 	`Replace 'x = decade' with 'x = state'`
 > </details>
 
+We see from our Box Plots that the data is very different across the decades and this could be for a number of reasons. To solve this problem, let us add a new command in the `mutate()` command in creating the **ufo.map** object and create the natural log of the number of sightings. We can then re-run our box plot and we see something much more in line with expectations. Now we can use the advantages of the *ggplot2* package to clean this data up a bit. Copy of the code below and run to see what you get.
+
+```R
+ ggplot(ufo.map) +
+    geom_boxplot(aes(x = decade, y = ln_n), color = "navy") + 
+    theme_bw() + 
+    labs(title = "Box Plot of UFO sightings by Decade in the U.S.",
+         caption = "Data obtained from Kaggle.com") +
+    xlab("Decade") +
+    ylab("Natural Log of Annual Sightings")
+  
+  ggplot(ufo.map) +
+    geom_sf(aes(fill = ln_n)) +
+    labs(title = "Natural Log of UFO Sightings by Decade in the U.S.",
+         caption = "Data obtained from Kaggle.com") +
+    scale_fill_gradient2(low = "white", high = "blue", na.value = NA, 
+                         name = "LN(Sightings)",
+                         limits = c(0, 9)) +
+    theme_bw()+
+    theme(axis.ticks = element_blank(),
+          axis.text.x = element_blank(),
+          axis.text.y = element_blank(),
+          legend.position = "bottom",
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.border = element_blank()) +
+    facet_wrap( ~ decade)
+```
 
 
 
