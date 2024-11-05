@@ -282,7 +282,9 @@ In the census data we know the FIPS code is named GEOID so we can rename that va
 
 <strong>Question: Why will the two dataframes not join on the GEOID vector?</strong>
 
-<strong>Answer: They are different types. The GEOID in the **cen.map** dataframe is character while it is numeric in the new **ufo.st** dataframe. Additionally, the GEOID in the census data is "padded". </strong>
+<details>
+<summary>Answer: They are different types. The GEOID in the **cen.map** dataframe is character while it is numeric in the new **ufo.st** dataframe. Additionally, the GEOID in the census data is "padded". </summary>
+</details>
 
 The best way to fix this problem is to add another mutate command into our **ufo.st** pipped code to change the vector type of "GEOID" and then pad it with zeros. We can do this with the nested command `mutate(GEOID = str_pad(as.character(GEOID), width = 2, side = "left", pad="0"))` and follow this up with a line to remove our unwanted GEOIDs [` filter(GEOID != "02", GEOID != "72", GEOID != "15")`].
 
